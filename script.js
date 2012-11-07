@@ -32,7 +32,8 @@
 
     function Spinnable(element, inputObj) {
         var self = this;
-        var xStart;
+        var xStart,
+            currentX;
         
         this.element = document.getElementById(element);
         this.bgPosX = 0;
@@ -50,11 +51,10 @@
         }
 
         this.move = function(e) {
-            var offset = Math.round((self.xStart-e.pageX)/10);
-            self.chgBgPosX(offset);
-            console.log("start: " + self.xStart);
-            console.log("current: " + e.pageX);
-            console.log("diff: " + self.bgPosX);
+            var moveSign;
+            currentX > e.pageX ? moveSign = 1 : moveSign = -1;
+            self.chgBgPosX(moveSign);
+            currentX = e.pageX;
         }
 
         this.end = function(e) {
